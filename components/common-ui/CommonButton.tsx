@@ -7,16 +7,18 @@ const CommonButton = ({
   btnType,
   containerStyles,
   handleClick,
-  disabled,
+  isDisabled,
+  textStyles,
+  rightIcon,
 }: CommonButtonProps) => {
   return (
     <button
-      disabled={disabled ?? false}
+      disabled={isDisabled ?? false}
       type={btnType ?? "button"}
       className={`custom-btn ${containerStyles}`}
       onClick={handleClick}
     >
-      <span className={`flex-1`}>{title}</span>
+      <span className={`flex-1 ${textStyles}`}>{title}</span>
     </button>
   );
 };
