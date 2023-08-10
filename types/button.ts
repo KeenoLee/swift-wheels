@@ -4,6 +4,8 @@ export interface CommonButtonProps {
   title: string;
   btnType?: "submit" | "button";
   containerStyles?: string;
+  textStyles?: string;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
+  isDisabled?: boolean;
+  rightIcon?: string;
 }
