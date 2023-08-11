@@ -5,3 +5,13 @@ export interface FilterProps {
   limit: number;
   model: string;
 }
+
+export interface CommonFilterProps {
+  title: string;
+  options: OptionProps[];
+}
+
+export interface OptionProps {
+  title: string;
+  value: string;
+}
