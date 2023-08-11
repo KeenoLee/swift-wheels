@@ -1,14 +1,15 @@
 import { CarProps } from "@/types/car";
+import { FilterProps } from "@/types/filter";
 
-export async function fetchCars() {
+export async function fetchCars(filters: FilterProps) {
+  const { manufacturer, year, fuel, limit, model } = filters;
+
   const headers = {
-    //X-RapidAPI-Key should store into .env
-    //Due to this repo is demo, the key will be temporarily stored here
     "X-RapidAPI-Key": process.env.RAPID_CARS_KEY || "",
     "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
   };
   const response = await fetch(
-    "https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=q4",
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
     { headers: headers }
   );
   const result = await response.json();
@@ -35,13 +36,22 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
 
   const { make, year, model } = car;
 
-  url.searchParams.append("customer", process.env.IMAGIN_API_KEY || "");
+  url.searchParams.append("customer", "hrjavascript-mastery");
   url.searchParams.append("make", make);
   url.searchParams.append("modelFamily", model.split(" ")[0]);
   url.searchParams.append("zoomType", "fullscreen");
   url.searchParams.append("modelYear", `${year}`);
-  // url.searchParams.append('zoomLevel', zoomLevel);
   url.searchParams.append("angle", `${angle}`);
 
   return `${url}`;
+};
+
+export const updatedSearchParams = (type: string, value: string) => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  searchParams.set(type, value);
+
+  const newPath = `${window.location.pathname}?${searchParams.toString()}`;
+
+  return newPath;
 };
