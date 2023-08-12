@@ -9,3 +9,8 @@ export interface CommonButtonProps {
   isDisabled?: boolean;
   rightIcon?: string;
 }
+
+export interface ShowMoreBtnProps {
+  pageNumber: number;
+  isNext: boolean;
+}
